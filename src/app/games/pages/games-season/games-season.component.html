@@ -1,0 +1,59 @@
+<h2>J U E G O S</h2>
+
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="buscar()" autocomplete="off">
+      <input
+        type="text"
+        name="termino"
+        class="form-control"
+        [(ngModel)]="termino"
+        placeholder="Buscar juegos por año"
+      />
+    </form>
+  </div>
+</div>
+
+<hr />
+
+<div *ngIf="games.length < 0" class="alert alert-danger">
+  No se encontro nada con el año {{ termino }}
+</div>
+
+<div *ngIf="games.length > 0" class="row">
+  <div class="col">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Año</th>
+          <th>Semana</th>
+          <th>Equipo Local</th>
+          <th>Puntos Local</th>
+          <th>Equipo Visitante</th>
+          <th>Puntos Local</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of games; let i = index">
+          <td>{{ game.season }}</td>
+          <td>{{ game.week }}</td>
+          <td>
+            <a [routerLink]="['/roster', game.home_team]">{{
+              game.home_team
+            }}</a>
+          </td>
+          <td>{{ game.home_points }}</td>
+          <td>
+            <a [routerLink]="['/roster', game.away_team]">{{
+              game.away_team
+            }}</a>
+          </td>
+          <td>{{ game.away_points }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

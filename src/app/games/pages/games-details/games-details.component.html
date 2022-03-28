@@ -1,0 +1,32 @@
+<h2>Roster del equipo {{ roster[0].team }}</h2>
+<hr />
+
+<div *ngIf="roster.length > 0" class="row">
+  <div class="col">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Equipo</th>
+          <th>Peso LB</th>
+          <th>Numero</th>
+          <th>Posicion</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rosterr of roster; let i = index">
+          <td>{{ rosterr.first_name }}</td>
+          <td>{{ rosterr.last_name }}</td>
+          <td>
+            {{ rosterr.team }}
+          </td>
+          <td>{{ rosterr.weight }}</td>
+          <td>{{ rosterr.jersey }}</td>
+          <td>{{ rosterr.position }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

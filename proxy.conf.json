@@ -1,0 +1,20 @@
+{
+  "/roster": {
+    "target": "https://api.collegefootballdata.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/games": {
+    "target": "https://api.collegefootballdata.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/teams": {
+    "target": "https://api.collegefootballdata.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
