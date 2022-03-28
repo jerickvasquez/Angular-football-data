@@ -6,9 +6,11 @@
   <div class="col">
     <form (ngSubmit)="buscar()" autocomplete="off">
       <input
-        type="text"
+        type="number"
         name="termino"
         class="form-control"
+        min="1869"
+        max="{{ date.getFullYear() }}"
         [(ngModel)]="termino"
         placeholder="Buscar juegos por año"
       />
@@ -18,9 +20,11 @@
 
 <hr />
 
-<div *ngIf="games.length < 0" class="alert alert-danger">
+
+<div *ngIf="hayError || termino<1869 || termino>date.getFullYear()" class="alert alert-danger">
   No se encontro nada con el año {{ termino }}
 </div>
+
 
 <div *ngIf="games.length > 0" class="row">
   <div class="col">
@@ -33,7 +37,6 @@
           <th>Puntos Local</th>
           <th>Equipo Visitante</th>
           <th>Puntos Local</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -45,13 +48,29 @@
               game.home_team
             }}</a>
           </td>
-          <td>{{ game.home_points }}</td>
+          <td
+            [ngClass]="
+              game.home_points > game.away_points
+                ? 'text-success'
+                : 'text-danger'
+            "
+          >
+            {{ game.home_points }}
+          </td>
           <td>
             <a [routerLink]="['/roster', game.away_team]">{{
               game.away_team
             }}</a>
           </td>
-          <td>{{ game.away_points }}</td>
+          <td
+            [ngClass]="
+              game.home_points < game.away_points
+                ? 'text-success'
+                : 'text-danger'
+            "
+          >
+            {{ game.away_points }}
+          </td>
         </tr>
       </tbody>
     </table>

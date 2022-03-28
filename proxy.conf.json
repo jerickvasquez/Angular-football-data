@@ -16,5 +16,11 @@
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
+  },
+  "/player/search": {
+    "target": "https://api.collegefootballdata.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
   }
 }

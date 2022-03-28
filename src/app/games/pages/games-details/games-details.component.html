@@ -1,4 +1,4 @@
-<h2>Roster del equipo {{ roster[0].team }}</h2>
+<h2>R O S T E R</h2>
 <hr />
 
 <div *ngIf="roster.length > 0" class="row">
@@ -6,6 +6,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>#</th>
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Equipo</th>
@@ -17,6 +18,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let rosterr of roster; let i = index">
+          <td>
+            <a
+              [routerLink]="['/player/search', getName(rosterr), rosterr.team]"
+              >{{ rosterr.id }}</a
+            >
+          </td>
           <td>{{ rosterr.first_name }}</td>
           <td>{{ rosterr.last_name }}</td>
           <td>

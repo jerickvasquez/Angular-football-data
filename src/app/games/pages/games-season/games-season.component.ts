@@ -8,25 +8,25 @@ import { GamesService } from '../../services/games.service';
   styles: [],
 })
 export class GamesSeasonComponent {
-
-  games: Games[]=[];
+  date: Date = new Date();
+  year = this.date.getFullYear();
+  games: Games[] = [];
+  filterGames: Games[] = [];
   hayError: boolean = false;
-  termino: number = 2000;
+  termino!: number;
 
   constructor(private gamesService: GamesService) {}
 
   buscar() {
     this.hayError = false;
-    console.log(this.termino);
 
     this.gamesService.getGames(this.termino).subscribe(
       (res) => {
-        this.games=res;
-        console.log(res);
+        this.games = res;
       },
       (err) => {
         this.hayError = true;
-        this.games=[];
+        this.games = [];
       }
     );
   }

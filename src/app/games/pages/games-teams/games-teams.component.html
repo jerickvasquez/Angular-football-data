@@ -3,48 +3,31 @@
 <hr />
 
 <div class="row">
-  <div class="col">
-    <form (ngSubmit)="buscar()" autocomplete="off">
-      <input
-        type="text"
-        name="termino"
-        class="form-control"
-        placeholder="Buscar equipos"
-      />
-    </form>
-  </div>
-</div>
-
-<hr />
-
-<div *ngIf="teams.length < 0" class="alert alert-danger">
-  No se encontro nada
-</div>
-
-<div *ngIf="teams.length > 0" class="row">
-  <div class="col">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Escuela</th>
-          <th>Mascota</th>
-          <th>Abreviacion</th>
-          <th>Conferencia</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let team of teams; let i = index">
-          <td>{{ team.id }}</td>
-          <td>
-            <a [routerLink]="['/teams']">{{ team.school }}</a>
-          </td>
-          <td>{{ team.mascot }}</td>
-          <td>{{ team.abbreviation }}</td>
-          <td>{{ team.conference }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="teams.length > 0" class="row">
+    <div class="col">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Escuela</th>
+            <th>Mascota</th>
+            <th>Abreviacion</th>
+            <th>Conferencia</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let team of teams; let i = index">
+            <td>{{ team.id }}</td>
+            <td>
+              {{ team.school }}
+            </td>
+            <td>{{ team.mascot }}</td>
+            <td>{{ team.abbreviation }}</td>
+            <td>{{ team.conference }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

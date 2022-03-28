@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { GamesService } from '../../services/games.service';
-import { switchMap } from 'rxjs';
 import { Teams } from '../../interfaces/teams.interface';
+
 
 @Component({
   selector: 'app-games-teams',
@@ -11,16 +10,19 @@ import { Teams } from '../../interfaces/teams.interface';
 })
 export class GamesTeamsComponent implements OnInit {
   teams: Teams[] = [];
+
+
   hayError: boolean = false;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private teamService: GamesService
-  ) {}
-  buscar() {
+  constructor(private teamService: GamesService) {
+
+  }
+
+
+  ngOnInit(): void {
     this.hayError = false;
 
-    this.teamService.getTeamsPorGames().subscribe(
+    this.teamService.getTeams().subscribe(
       (res) => {
         this.teams = res;
       },
@@ -29,16 +31,5 @@ export class GamesTeamsComponent implements OnInit {
         this.teams = [];
       }
     );
-  }
-  ngOnInit(): void {
-    // this.activatedRoute.params.subscribe((params) =>
-    //   this.gamesService
-    //     .getTeamsPorGames()
-    //     .subscribe((team) => console.log('ENTROOOO', team))
-    // );
-    //   this.activatedRoute.params
-    //     .pipe(switchMap( (params) => this.gamesService.getTeamsPorGames() ))
-    //     .subscribe((res) => console.log(res));
-    // }
   }
 }

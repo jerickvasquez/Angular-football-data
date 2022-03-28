@@ -5,14 +5,22 @@ import { GamesTeamsComponent } from './pages/games-teams/games-teams.component';
 import { GamesDetailsComponent } from './pages/games-details/games-details.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     GamesSeasonComponent,
     GamesTeamsComponent,
     GamesDetailsComponent,
+    PlayerDetailsComponent,
   ],
-  exports: [GamesSeasonComponent, GamesTeamsComponent, GamesDetailsComponent],
-  imports: [CommonModule, FormsModule, RouterModule],
+  exports: [
+    GamesSeasonComponent,
+    GamesTeamsComponent,
+    GamesDetailsComponent,
+    PlayerDetailsComponent,
+  ],
+  imports: [CommonModule, FormsModule, RouterModule, NgbModule],
 })
 export class GamesModule {}

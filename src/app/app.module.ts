@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { GamesModule } from './games/games.module';
 import { MyInterceptor } from './interceptor/interceptor.service';
 import { SharedModule } from './shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Los modulos siempre van en los imports
 @NgModule({
@@ -17,6 +19,8 @@ import { SharedModule } from './shared/shared.module';
     GamesModule,
     SharedModule,
     HttpClientModule,
+    NgbModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {

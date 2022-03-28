@@ -1,0 +1,29 @@
+<h2>P L A Y E R</h2>
+<hr />
+
+<div *ngIf="player.length > 0" class="row">
+  <div class="col">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Equipo</th>
+          <th>Nombre</th>
+          <th>Peso LB</th>
+          <th>Numero</th>
+          <th>Posicion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let playerr of player; let i = index">
+          <td>{{ player[i].id }}</td>
+          <td>{{ playerr.team }}</td>
+          <td>{{ playerr.name }}</td>
+          <td>{{ playerr.weight }}</td>
+          <td>{{ playerr.jersey }}</td>
+          <td>{{ playerr.position }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

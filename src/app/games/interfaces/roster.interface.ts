@@ -1,5 +1,5 @@
 export interface Roster {
-  id: string;
+  id: string | null;
   first_name: null | string;
   last_name: null | string;
   team: string | null;
