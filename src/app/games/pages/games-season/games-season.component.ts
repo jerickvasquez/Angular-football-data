@@ -10,19 +10,22 @@ import { GamesService } from '../../services/games.service';
 export class GamesSeasonComponent {
   date: Date = new Date();
   year = this.date.getFullYear();
+
   games: Games[] = [];
   filterGames: Games[] = [];
+
   hayError: boolean = false;
   termino!: number;
 
-  constructor(private gamesService: GamesService) {}
+  searchGames() {
+    this.filterGames = this.games.filter((games) => games.id == this.termino);
 
-  buscar() {
     this.hayError = false;
 
     this.gamesService.getGames(this.termino).subscribe(
       (res) => {
         this.games = res;
+        this.filterGames = res;
       },
       (err) => {
         this.hayError = true;
@@ -30,4 +33,21 @@ export class GamesSeasonComponent {
       }
     );
   }
+
+  constructor(private gamesService: GamesService) {}
+
+  // buscar() {
+  //   this.hayError = false;
+
+  //   this.gamesService.getGames(this.termino).subscribe(
+  //     (res) => {
+  //       this.games = res;
+  //       this.filterGames = res;
+  //     },
+  //     (err) => {
+  //       this.hayError = true;
+  //       this.games = [];
+  //     }
+  //   );
+  // }
 }

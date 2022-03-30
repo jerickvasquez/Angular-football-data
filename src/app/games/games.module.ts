@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PlayerDetailsComponent } from './pages/player-details/player-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MaterialModule } from '../material/material.module';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +23,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GamesDetailsComponent,
     PlayerDetailsComponent,
   ],
-  imports: [CommonModule, FormsModule, RouterModule, NgbModule],
+  imports: [CommonModule, MaterialModule, FormsModule, RouterModule, NgbModule],
 })
 export class GamesModule {}

@@ -2,32 +2,52 @@
 
 <hr />
 
-<div class="row">
-  <div *ngIf="teams.length > 0" class="row">
-    <div class="col">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Escuela</th>
-            <th>Mascota</th>
-            <th>Abreviacion</th>
-            <th>Conferencia</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let team of teams; let i = index">
-            <td>{{ team.id }}</td>
-            <td>
-              {{ team.school }}
-            </td>
-            <td>{{ team.mascot }}</td>
-            <td>{{ team.abbreviation }}</td>
-            <td>{{ team.conference }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<mat-form-field appearance="outline">
+  <mat-label>Filtrar</mat-label>
+  <input
+    matInput
+    (keyup)="aplicarFiltro($event)"
+    placeholder="Ejemplo: Adrian"
+    #input
+  />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- id Columna -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let teams">{{ teams.id }}</td>
+    </ng-container>
+
+    <!-- Escuela Columna -->
+    <ng-container matColumnDef="school">
+      <th mat-header-cell *matHeaderCellDef>Escuela</th>
+      <td mat-cell *matCellDef="let teams">{{ teams.school }}</td>
+    </ng-container>
+
+    <!-- Mascota Columna -->
+    <ng-container matColumnDef="mascot">
+      <th mat-header-cell *matHeaderCellDef>Mascota</th>
+      <td mat-cell *matCellDef="let teams">{{ teams.mascot }}</td>
+    </ng-container>
+
+    <!-- Abreviacion Columna -->
+    <ng-container matColumnDef="abbreviation">
+      <th mat-header-cell *matHeaderCellDef>Abreviacion</th>
+      <td mat-cell *matCellDef="let teams">{{ teams.abbreviation }}</td>
+    </ng-container>
+
+    <!-- Conferencia Columna -->
+    <ng-container matColumnDef="conference">
+      <th mat-header-cell *matHeaderCellDef>Conferencia</th>
+      <td mat-cell *matCellDef="let teams">{{ teams.conference }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
 </div>

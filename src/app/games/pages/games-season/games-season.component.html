@@ -4,27 +4,29 @@
 
 <div class="row">
   <div class="col">
-    <form (ngSubmit)="buscar()" autocomplete="off">
-      <input
-        type="number"
-        name="termino"
-        class="form-control"
-        min="1869"
-        max="{{ date.getFullYear() }}"
-        [(ngModel)]="termino"
-        placeholder="Buscar juegos por año"
-      />
-    </form>
+    <!-- <form (ngSubmit)="searchGames()" autocomplete="off"> -->
+    <input
+      (keyup)="searchGames()"
+      type="number"
+      name="termino"
+      class="form-control"
+      min="1869"
+      max="{{ date.getFullYear() - 1 }}"
+      [(ngModel)]="termino"
+      placeholder="Buscar juegos por año"
+    />
+    <!-- </form> -->
   </div>
 </div>
 
 <hr />
 
-
-<div *ngIf="hayError || termino<1869 || termino>date.getFullYear()" class="alert alert-danger">
+<div
+  *ngIf="hayError || termino < 1869 || termino > date.getFullYear() - 1"
+  class="alert alert-danger"
+>
   No se encontro nada con el año {{ termino }}
 </div>
-
 
 <div *ngIf="games.length > 0" class="row">
   <div class="col">
