@@ -1,5 +1,5 @@
 export interface Games {
-  id: number;
+  id: string;
   season: number;
   week: number;
   season_type: SeasonType;

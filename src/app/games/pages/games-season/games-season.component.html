@@ -4,28 +4,33 @@
 
 <div class="row">
   <div class="col">
-    <!-- <form (ngSubmit)="searchGames()" autocomplete="off"> -->
-    <input
-      (keyup)="searchGames()"
-      type="number"
-      name="termino"
-      class="form-control"
-      min="1869"
-      max="{{ date.getFullYear() - 1 }}"
-      [(ngModel)]="termino"
-      placeholder="Buscar juegos por año"
-    />
-    <!-- </form> -->
+    <mat-form-field>
+      <input
+        matInput
+        [min]="minDate"
+        [max]="maxDate"
+        [matDatepicker]="dateGames"
+        placeholder="Selecciona una fecha para ver todos los resultados de ese año"
+        readonly
+        (dateInput)="searchGames()"
+        [(ngModel)]="date"
+      />
+      <mat-datepicker-toggle matPrefix [for]="dateGames">
+      </mat-datepicker-toggle>
+      <mat-datepicker
+        #dateGames
+        [disabled]="false"
+        startView="multi-year"
+        color="accent"
+        [startAt]="minDate"
+        touchUi
+      ></mat-datepicker>
+    </mat-form-field>
   </div>
 </div>
 
-<hr />
-
-<div
-  *ngIf="hayError || termino < 1869 || termino > date.getFullYear() - 1"
-  class="alert alert-danger"
->
-  No se encontro nada con el año {{ termino }}
+<div *ngIf="hayError" class="alert alert-danger">
+  No se encontro nada con el año {{ date.getFullYear() }}
 </div>
 
 <div *ngIf="games.length > 0" class="row">

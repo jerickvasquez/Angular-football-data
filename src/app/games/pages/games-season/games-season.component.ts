@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Games } from '../../interfaces/games.interface';
 import { GamesService } from '../../services/games.service';
 
@@ -9,20 +10,22 @@ import { GamesService } from '../../services/games.service';
 })
 export class GamesSeasonComponent {
   date: Date = new Date();
+
   year = this.date.getFullYear();
 
   games: Games[] = [];
   filterGames: Games[] = [];
+  minDate = new Date(1869, 0, 1);
+  maxDate = new Date(this.year - 1, 12, 31);
 
   hayError: boolean = false;
-  termino!: number;
 
   searchGames() {
-    this.filterGames = this.games.filter((games) => games.id == this.termino);
+    this.filterGames = this.games.filter((games) => this.date.getFullYear());
 
     this.hayError = false;
 
-    this.gamesService.getGames(this.termino).subscribe(
+    this.gamesService.getGames(this.date.getFullYear()).subscribe(
       (res) => {
         this.games = res;
         this.filterGames = res;
@@ -35,19 +38,4 @@ export class GamesSeasonComponent {
   }
 
   constructor(private gamesService: GamesService) {}
-
-  // buscar() {
-  //   this.hayError = false;
-
-  //   this.gamesService.getGames(this.termino).subscribe(
-  //     (res) => {
-  //       this.games = res;
-  //       this.filterGames = res;
-  //     },
-  //     (err) => {
-  //       this.hayError = true;
-  //       this.games = [];
-  //     }
-  //   );
-  // }
 }
