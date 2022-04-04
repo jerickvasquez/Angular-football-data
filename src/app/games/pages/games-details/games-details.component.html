@@ -6,11 +6,11 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>#</th>
           <th>Nombre</th>
           <th>Apellido</th>
+          <th>Pais de origen</th>
           <th>Equipo</th>
-          <th>Peso LB</th>
+          <th>Peso</th>
           <th>Numero</th>
           <th>Posicion</th>
           <th></th>
@@ -21,15 +21,16 @@
           <td>
             <a
               [routerLink]="['/player/search', getName(rosterr), rosterr.team]"
-              >{{ rosterr.id }}</a
+              >{{ rosterr.first_name }}</a
             >
           </td>
-          <td>{{ rosterr.first_name }}</td>
+
           <td>{{ rosterr.last_name }}</td>
+          <td>{{ rosterr.home_country }}</td>
           <td>
             {{ rosterr.team }}
           </td>
-          <td>{{ rosterr.weight }}</td>
+          <td>{{ rosterr.weight }}LB</td>
           <td>{{ rosterr.jersey }}</td>
           <td>{{ rosterr.position }}</td>
         </tr>
