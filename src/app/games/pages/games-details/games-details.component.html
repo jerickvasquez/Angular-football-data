@@ -1,7 +1,7 @@
 <h2>R O S T E R</h2>
 <hr />
 
-<div *ngIf="roster.length > 0" class="row">
+<!-- <div *ngIf="roster.length > 0" class="row">
   <div class="col">
     <table class="table table-hover">
       <thead>
@@ -37,4 +37,77 @@
       </tbody>
     </table>
   </div>
+</div> -->
+
+<mat-form-field appearance="outline">
+  <mat-label>Filtrar</mat-label>
+  <input
+    matInput
+    (keyup)="aplicarFiltro($event)"
+    placeholder="Ejemplo: Adrian"
+    #input
+  />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- Nombre Columna -->
+    <ng-container matColumnDef="first_name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let roster">
+        <a [routerLink]="['/player/search', getName(roster), roster.team]">{{
+          roster.first_name
+        }}</a>
+      </td>
+    </ng-container>
+
+    <!-- Apellido Columna -->
+    <ng-container matColumnDef="last_name">
+      <th mat-header-cell *matHeaderCellDef>Apellido</th>
+      <td mat-cell *matCellDef="let roster">{{ roster.last_name }}</td>
+    </ng-container>
+
+    <!-- Pais de Origen Columna -->
+    <ng-container matColumnDef="home_country">
+      <th mat-header-cell *matHeaderCellDef>Pais de Origen</th>
+      <td mat-cell *matCellDef="let roster">{{ roster.home_country }}</td>
+    </ng-container>
+
+    <!-- Equipo Columna -->
+    <ng-container matColumnDef="team">
+      <th mat-header-cell *matHeaderCellDef>Equipo</th>
+      <td mat-cell *matCellDef="let roster">{{ roster.team }}</td>
+    </ng-container>
+
+    <!-- Peso Columna -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef>Peso</th>
+      <td mat-cell *matCellDef="let roster">{{ roster.weight }}</td>
+    </ng-container>
+
+    <!-- Numero Columna -->
+    <ng-container matColumnDef="jersey">
+      <th mat-header-cell *matHeaderCellDef>Numero</th>
+      <td mat-cell *matCellDef="let roster">{{ roster.jersey }}</td>
+    </ng-container>
+
+    <!-- Posicion Columna -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>Posicion</th>
+      <td mat-cell *matCellDef="let roster">{{ roster.position }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Fila que se muestra cuando no hay datos que coincidan.-->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No hay datos que coincidan con:"{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
 </div>

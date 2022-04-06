@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GamesService } from '../../services/games.service';
 import { Teams } from '../../interfaces/teams.interface';
-import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -32,6 +31,7 @@ export class GamesTeamsComponent implements OnInit {
         this.teams = res;
         this.dataSource = new MatTableDataSource<Teams>(this.teams);
         this.dataSource.paginator = this.paginator;
+        console.log(res);
       },
       (err) => {
         this.teams = [];

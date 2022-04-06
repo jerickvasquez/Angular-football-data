@@ -28,6 +28,7 @@ export class PlayerDetailsComponent implements OnInit {
         .getPlayerDetails(params['name'], params['team'])
         .subscribe((player) => {
           this.player = player;
+          console.log(player);
         });
     });
   }

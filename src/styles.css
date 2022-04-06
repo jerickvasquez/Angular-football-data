@@ -24,3 +24,7 @@ td,
 th {
   width: 25%;
 }
+
+.mat-column-select {
+  overflow: initial;
+}
