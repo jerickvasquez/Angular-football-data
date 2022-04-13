@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Games } from '../../interfaces/games.interface';
 import { GamesService } from '../../services/games.service';
 
@@ -18,7 +19,22 @@ export class GamesSeasonComponent {
   minDate = new Date(1869, 0, 1);
   maxDate = new Date(this.year - 1, 12, 31);
 
+  displayedColumns: string[] = [
+    'season',
+    'week',
+    'home_team',
+    'home_points',
+    'away_team',
+    'away_points',
+  ];
+
+  dataSource: any;
+
   hayError: boolean = false;
+
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
+  constructor(private gamesService: GamesService) {}
 
   searchGames() {
     this.filterGames = this.games.filter((games) => this.date.getFullYear());
@@ -29,6 +45,8 @@ export class GamesSeasonComponent {
       (res) => {
         this.games = res;
         this.filterGames = res;
+        this.dataSource = new MatTableDataSource<Games>(this.filterGames);
+        this.dataSource.paginator = this.paginator;
       },
       (err) => {
         this.hayError = true;
@@ -37,5 +55,11 @@ export class GamesSeasonComponent {
     );
   }
 
-  constructor(private gamesService: GamesService) {}
+  aplicarFiltro(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }

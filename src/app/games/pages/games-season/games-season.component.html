@@ -23,7 +23,6 @@
         startView="multi-year"
         color="accent"
         [startAt]="minDate"
-        touchUi
       ></mat-datepicker>
     </mat-form-field>
   </div>
@@ -33,7 +32,7 @@
   No se encontro nada con el año {{ date.getFullYear() }}
 </div>
 
-<div *ngIf="games.length > 0" class="row">
+<!-- <div *ngIf="games.length > 0" class="row">
   <div class="col">
     <table class="table table-hover">
       <thead>
@@ -82,4 +81,89 @@
       </tbody>
     </table>
   </div>
+</div> -->
+
+<mat-form-field appearance="outline">
+  <mat-label>Filtrar</mat-label>
+  <input
+    matInput
+    (keyup)="aplicarFiltro($event)"
+    placeholder="Ejemplo: Illinois"
+    #input
+  />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- Año Columna -->
+    <ng-container matColumnDef="season">
+      <th mat-header-cell *matHeaderCellDef>Año</th>
+      <td mat-cell *matCellDef="let games">
+        {{ games.season }}
+      </td>
+    </ng-container>
+
+    <!-- Semana Columna -->
+    <ng-container matColumnDef="week">
+      <th mat-header-cell *matHeaderCellDef>Semana</th>
+      <td mat-cell *matCellDef="let games">{{ games.week }}</td>
+    </ng-container>
+
+    <!-- Equipo Local Columna -->
+    <ng-container matColumnDef="home_team">
+      <th mat-header-cell *matHeaderCellDef>Equipo Local</th>
+      <td mat-cell *matCellDef="let games">
+        <a [routerLink]="['/roster', games.home_team]">{{ games.home_team }}</a>
+      </td>
+    </ng-container>
+
+    <!-- Puntos Local Columna -->
+    <ng-container matColumnDef="home_points">
+      <th mat-header-cell *matHeaderCellDef>Puntos Local</th>
+      <td
+        mat-cell
+        *matCellDef="let games"
+        [ngClass]="
+          games.home_points > games.away_points ? 'text-success' : 'text-danger'
+        "
+      >
+        {{ games.home_points }}
+      </td>
+    </ng-container>
+
+    <!-- Equipo Visitante Columna -->
+    <ng-container matColumnDef="away_team">
+      <th mat-header-cell *matHeaderCellDef>Equipo Visitante</th>
+      <td mat-cell *matCellDef="let games">
+        <a [routerLink]="['/roster', games.away_team]">{{ games.away_team }}</a>
+      </td>
+    </ng-container>
+
+    <!-- Puntos Visitante Columna -->
+    <ng-container matColumnDef="away_points">
+      <th mat-header-cell *matHeaderCellDef>Puntos Visitante</th>
+      <td
+        mat-cell
+        *matCellDef="let games"
+        [ngClass]="
+          games.home_points < games.away_points ? 'text-success' : 'text-danger'
+        "
+      >
+        {{ games.away_points }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Fila que se muestra cuando no hay datos que coincidan.-->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No hay datos que coincidan con:"{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
 </div>
