@@ -1,4 +1,4 @@
-<h2>J U E G O S</h2>
+<h1>J U E G O S</h1>
 
 <hr />
 
@@ -15,14 +15,15 @@
         (dateInput)="searchGames()"
         [(ngModel)]="date"
       />
+      <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matPrefix [for]="dateGames">
       </mat-datepicker-toggle>
       <mat-datepicker
-        #dateGames
         [disabled]="false"
         startView="multi-year"
         color="accent"
         [startAt]="minDate"
+        #dateGames
       ></mat-datepicker>
     </mat-form-field>
   </div>
@@ -31,57 +32,6 @@
 <div *ngIf="hayError" class="alert alert-danger">
   No se encontro nada con el año {{ date.getFullYear() }}
 </div>
-
-<!-- <div *ngIf="games.length > 0" class="row">
-  <div class="col">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Año</th>
-          <th>Semana</th>
-          <th>Equipo Local</th>
-          <th>Puntos Local</th>
-          <th>Equipo Visitante</th>
-          <th>Puntos Local</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let game of games; let i = index">
-          <td>{{ game.season }}</td>
-          <td>{{ game.week }}</td>
-          <td>
-            <a [routerLink]="['/roster', game.home_team]">{{
-              game.home_team
-            }}</a>
-          </td>
-          <td
-            [ngClass]="
-              game.home_points > game.away_points
-                ? 'text-success'
-                : 'text-danger'
-            "
-          >
-            {{ game.home_points }}
-          </td>
-          <td>
-            <a [routerLink]="['/roster', game.away_team]">{{
-              game.away_team
-            }}</a>
-          </td>
-          <td
-            [ngClass]="
-              game.home_points < game.away_points
-                ? 'text-success'
-                : 'text-danger'
-            "
-          >
-            {{ game.away_points }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div> -->
 
 <mat-form-field appearance="outline">
   <mat-label>Filtrar</mat-label>
